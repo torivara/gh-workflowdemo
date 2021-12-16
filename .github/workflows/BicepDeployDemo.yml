@@ -1,0 +1,75 @@
+name: BicepDeployDemo
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/BicepDeployDemo.yml'
+      - 'demos/flex/hub-spoke/solutions/tieredapp'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/BicepDeployDemo.yml'
+      - 'demos/flex/hub-spoke/solutions/tieredapp'
+
+env:
+  Subscription: ${{ secrets.SUBSCRIPTION_ID }}
+  AppID: ${{ secrets.APP_ID }}
+  AppSecret: ${{ secrets.APP_SECRET }}
+  Location: norwayeast
+  TenantID: ${{ secrets.TENANT_ID }}
+  ResourceGroupName: 'tia-bicepdemo-community-rg'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Connect to Azure
+      uses: torivara/AzConnect@v1
+
+    - name: BicepDemo - Create Resource Group
+      shell: pwsh
+      run: |
+          az group create --name ${{ env.ResourceGroupName }} --location ${{ env.Location }}
+    
+    - name: BicepDemo - Validate Bicep File
+      shell: pwsh
+      run: |
+        bicep build demos/flex/hub-spoke/solutions/tieredapp/deploy.bicep
+    
+    - name: BicepDemo - What-If Deployment
+      id: whatifdeployment
+      shell: pwsh
+      if: github.event_name == 'pull_request'
+      run: |
+        # Perform what-if deployment and output to variable and console
+        az deployment group what-if `
+        --resource-group ${{ env.ResourceGroupName }} `
+        --template-file demos/flex/hub-spoke/solutions/tieredapp/deploy.bicep `
+        --parameters 'name=demoApp' 'prefix=tia' | Tee-Object -Variable deployment
+        
+        # Set content of temporary output markdown file
+        $deployment | Out-File -FilePath /tmp/OUTPUT.md -Encoding UTF8 -Force
+    
+    - name: BicepDemo - Post What-If output in PR
+      shell: pwsh
+      if: github.event_name == 'pull_request'
+      run: |
+        gh pr comment ${{ github.event.pull_request.number }} --body-file /tmp/OUTPUT.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: BicepDemo - Deploy Tiered App
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      shell: pwsh
+      run: |
+        # Perform deployment of resource
+        az deployment group create `
+        --resource-group ${{ env.ResourceGroupName }} `
+        --template-file demos/flex/hub-spoke/solutions/tieredapp/deploy.bicep `
+        --parameters 'name=demoApp' 'prefix=tia'
