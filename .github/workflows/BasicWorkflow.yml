@@ -1,0 +1,16 @@
+name: Simple workflow
+
+on: [workflow_dispatch]
+
+env:
+  output: 'Hello world!'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Write-output
+      shell: pwsh
+      run: |
+          Write-Output ${{ env.output }}

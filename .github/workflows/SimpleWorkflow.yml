@@ -1,0 +1,41 @@
+name: SimpleWorkflow
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'src/resourcegroup'
+
+env:
+  Subscription: ${{ secrets.SUBSCRIPTION_ID }}
+  AppID: ${{ secrets.APP_ID }}
+  AppSecret: ${{ secrets.APP_SECRET }}
+  Location: norwayeast
+  TenantID: ${{ secrets.TENANT_ID }}
+  ResourceGroupName: 'tia-bicepdemo-community-rg'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Connect to Azure
+      uses: torivara/AzConnect@v1
+
+    - name: BicepDemo - Create Resource Group
+      shell: pwsh
+      run: |
+          az group create --name ${{ env.ResourceGroupName }} --location ${{ env.Location }}
+      
+    - name: BicepDemo - Deploy Resource Group
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      shell: pwsh
+      run: |
+        # Perform deployment of resource
+        az deployment group create `
+        --resource-group ${{ env.ResourceGroupName }} `
+        --template-file src/resourcegroup/main.bicep `
+        --parameters 'name=demoApp' 'prefix=tia'
