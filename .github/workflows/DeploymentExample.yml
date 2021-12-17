@@ -1,4 +1,4 @@
-name: DeploymentExample
+name: Deployment Example Workflow
 
 on:
   workflow_dispatch:

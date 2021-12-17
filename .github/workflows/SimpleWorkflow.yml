@@ -1,4 +1,4 @@
-name: SimpleWorkflow
+name: Simple Workflow
 on:
   push:
     branches:
