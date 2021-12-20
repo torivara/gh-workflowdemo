@@ -23,6 +23,7 @@ Resources:
 
 - [Quickstart](https://docs.github.com/en/actions/quickstart)
 - [Starter workflows](https://github.blog/2021-12-17-getting-started-with-github-actions-just-got-easier/)
+- [StackAbuse - Article](https://stackabuse.com/getting-started-with-github-actions-software-automation/)
 
 ## Git
 
@@ -63,6 +64,8 @@ on: # Trigger on
       - '!**/*/README.md' # Exlucde files with exclamation mark
   tags: # Trigger on tags pushed to repository
      - 'v*' # Will trigger if any tag has v* pattern
+  schedule: # Will trigger on a cron schedule
+    cron: '0 22 * * *' # This is a nighly build scheduled for 10PM every day.
 
 env: # Declare environment variables
   myEnvironmentVariable: 'variable value' # This is a variable that can be used in your actions
@@ -75,16 +78,32 @@ jobs: # Name different jobs. Different jobs run on different runners.
 
     - name: Checkout source code # Check out source code from your repo
       uses: actions/checkout@v2 # Names the GitHub Action which runs in this step
-    
+
     - name: Run script # Name of this step
       run: | # Run inline script as declared below
         az login
         az account set -s '${{ secrets.SUBSCRIPTION_ID }}'
+
+Job2: # Name of second job
+    runs-on: {{matrix.os}} # Run several different OSs
+      strategy:
+        matrix: # Determines which runners to use
+          os: [ubuntu-latest, windows-2016, macos-latest ]
+      needs: build-and-deploy
+      
+      steps:
+      - name: Checkout source code # Check out source code from your repo
+        uses: actions/checkout@v2 # Names the GitHub Action which runs in this step
 ```
 
 ## Events
 
 An event is a specific activity in a repository that triggers a workflow run. For example, activity can originate from GitHub when someone creates a pull request, opens an issue, or pushes a commit to a repository.
+
+## Jobs
+
+The jobs keyword lists actions that will be executed. One workflow can hold multiple jobs with multiple steps each.
+By default, all jobs run in parallel, but we can make one job wait for the execution of another using the needs keyword.
 
 ## Actions
 
