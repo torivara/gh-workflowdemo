@@ -1,5 +1,7 @@
 # GitHub CI/CD with Workflows and Actions
 
+!["GitHub Actions"](.media/ghactions.png)
+
 Presenting and demonstrating GitHub Actions and workflows.
 
 ## Agenda
