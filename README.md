@@ -123,9 +123,7 @@ Available packages listed [here](https://docs.github.com/en/actions/using-github
 
 You can self host a runner if you need custom tools installed.
 
-## Demoer
-
-Some demos to follow.
+## Demos
 
 ### Basic demo
 
