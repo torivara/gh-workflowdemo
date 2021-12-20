@@ -17,6 +17,25 @@ Presenting and demonstrating GitHub Actions and workflows.
   - Not so basic
   - Pull Request with what-if and automatic PR comment
 
+Resources:
+
+- [Quickstart](https://docs.github.com/en/actions/quickstart)
+- [Starter workflows](https://github.blog/2021-12-17-getting-started-with-github-actions-just-got-easier/)
+
+## Git
+
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+Git is easy to learn and has a tiny footprint with lightning fast performance. It outclasses SCM tools like Subversion, CVS, Perforce, and ClearCase with features like cheap local branching, convenient staging areas, and multiple workflows.
+
+- Central repository with all code.
+- Branches for different directions/features or whatever your branching strategy decides.
+- Everyone has a copy of the code.
+- Commits and pushes to send code.
+- Pull Request for reviews and automatic actions.
+
+[More info](https://git-scm.com/)
+
 ## GitHub Actions/Workflows
 
 You can configure a GitHub Actions workflow to be triggered when an event occurs in your repository, such as a pull request being opened or an issue being created. Your workflow contains one or more jobs which can run in sequential order or in parallel. Each job will run inside its own virtual machine runner, or inside a container, and has one or more steps that either run a script that you define or run an action, which is a reusable extension that can simplify your workflow.
