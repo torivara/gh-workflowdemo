@@ -55,7 +55,7 @@ on: # Trigger on
   pull_request: # Runs on Pull Requests
     paths: # Determines paths to run if changed
       - '.github/workflows/workflowfile.yml' # Will trigger if PR changes this file
-      - 'src/bicep' # Will also trigger if PR changes files in this folder
+      - 'src/bicep/**' # Will also trigger if PR changes files in this folder
       - '!**/*/README.md' # Exlucde files with exclamation mark
   push: # Runs on commits and pushes to named branches
     branches: # Name the branches which triggers this workflow
@@ -131,12 +131,16 @@ You can self host a runner if you need custom tools installed.
 
 [BasicWorkflow](.github/workflows/basicworkflow.yml)
 
-
+[!["BasicWorkflow"](.media/basicworkflow.png "BasicWorkflow")](https://github.com/torivara/gh-workflowdemo/actions/workflows/BasicWorkflow.yml)
 
 ### Simple demo
 
 [SimpleWorkflow](.github/workflows/SimpleWorkflow.yml)
 
+[!["SimpleWorkflow"](.media/simpleworkflow.png "SimpleWorkflow")](https://github.com/torivara/gh-workflowdemo/actions/workflows/SimpleWorkflow.yml)
+
 ### Pull Request what-if
 
 [DeploymentExample](.github/workflows/DeploymentExample.yml)
+
+[!["DeploymentExample"](.media/deploymentexample.png "DeploymentExample")](https://github.com/torivara/gh-workflowdemo/actions/workflows/DeploymentExample.yml)

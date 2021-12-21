@@ -29,11 +29,6 @@ jobs:
 
     - name: Connect to Azure
       uses: torivara/AzConnect@v1
-
-    - name: BicepDemo - Create Resource Group
-      shell: pwsh
-      run: |
-          az group create --name ${{ env.ResourceGroupName }} --location ${{ env.Location }}
     
     - name: BicepDemo - Validate Bicep File
       shell: pwsh
@@ -49,7 +44,7 @@ jobs:
         az deployment sub what-if `
         --location ${{ env.Location }} `
         --template-file src/webapp/main.bicep `
-        --parameters 'name=demoApp' 'prefix=tia' | Tee-Object -Variable deployment
+        --parameters 'appName=demoApp' | Tee-Object -Variable deployment
         
         # Set content of temporary output markdown file
         $deployment | Out-File -FilePath /tmp/OUTPUT.md -Encoding UTF8 -Force

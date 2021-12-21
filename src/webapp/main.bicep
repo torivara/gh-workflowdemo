@@ -15,6 +15,6 @@ module app '../../solutions/tieredapp/deploy.bicep' = {
   name: 'tieredApp-deploy'
   params: {
     name: appName
-    prefix: 'tia-demo'
+    prefix: 'tia'
   }
 }
