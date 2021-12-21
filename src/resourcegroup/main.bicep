@@ -1,6 +1,6 @@
 targetScope = 'subscription'
 
-param subscriptionId string
+param subscriptionId string = subscription().id
 param resourceGroupName string = 'demo-${uniqueString(subscriptionId)}-rg'
 
 //trigger
