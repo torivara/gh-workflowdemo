@@ -25,18 +25,13 @@ jobs:
 
     - name: Connect to Azure
       uses: torivara/AzConnect@v1
-
-    - name: BicepDemo - Create Resource Group
-      shell: pwsh
-      run: |
-          az group create --name ${{ env.ResourceGroupName }} --location ${{ env.Location }}
       
-    - name: BicepDemo - Deploy Resource Group
+    - name: BicepDemo - Deploy webapp
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       shell: pwsh
       run: |
         # Perform deployment of resource
-        az deployment group create `
-        --resource-group ${{ env.ResourceGroupName }} `
+        az deployment sub create `
+        --location ${{ env.Location }}
         --template-file src/resourcegroup/main.bicep `
-        --parameters 'name=demoApp' 'prefix=tia'
+        --parameters resourceGroupName=${{ env.ResourceGroupName }}
