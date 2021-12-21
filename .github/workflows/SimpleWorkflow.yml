@@ -26,7 +26,7 @@ jobs:
     - name: Connect to Azure
       uses: torivara/AzConnect@v1
       
-    - name: BicepDemo - Deploy webapp
+    - name: BicepDemo - Create Resource Group with template
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       shell: pwsh
       run: |
