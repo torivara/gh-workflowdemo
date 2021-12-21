@@ -13,7 +13,7 @@ env:
   AppSecret: ${{ secrets.APP_SECRET }}
   Location: norwayeast
   TenantID: ${{ secrets.TENANT_ID }}
-  ResourceGroupName: 'tia-bicepdemo-community-rg'
+  ResourceGroupName: 'tia-simpleworkflow-rg'
 
 jobs:
   simple-workflow:

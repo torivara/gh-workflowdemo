@@ -17,7 +17,7 @@ env:
   AppSecret: ${{ secrets.APP_SECRET }}
   Location: norwayeast
   TenantID: ${{ secrets.TENANT_ID }}
-  ResourceGroupName: 'tia-bicepdemo-community-rg'
+  ResourceGroupName: 'tia-deploymentexample-rg'
 
 jobs:
   build-and-deploy:
