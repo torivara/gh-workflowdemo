@@ -131,12 +131,16 @@ You can self host a runner if you need custom tools installed.
 
 [BasicWorkflow](.github/workflows/basicworkflow.yml)
 
-
+[!["BasicWorkflow"](.media/basicworkflow.png "BasicWorkflow")](https://github.com/torivara/gh-workflowdemo/actions/workflows/BasicWorkflow.yml)
 
 ### Simple demo
 
 [SimpleWorkflow](.github/workflows/SimpleWorkflow.yml)
 
+[!["SimpleWorkflow"](.media/simpleworkflow.png "SimpleWorkflow")](https://github.com/torivara/gh-workflowdemo/actions/workflows/SimpleWorkflow.yml)
+
 ### Pull Request what-if
 
 [DeploymentExample](.github/workflows/DeploymentExample.yml)
+
+[!["DeploymentExample"](.media/deploymentexample.png "DeploymentExample")](https://github.com/torivara/gh-workflowdemo/actions/workflows/DeploymentExample.yml)
