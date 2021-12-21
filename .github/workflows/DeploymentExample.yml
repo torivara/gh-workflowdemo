@@ -20,7 +20,7 @@ env:
   ResourceGroupName: 'tia-deploymentexample-rg'
 
 jobs:
-  build-and-deploy:
+  deployment-example:
     runs-on: ubuntu-latest
     steps:
 
@@ -46,8 +46,8 @@ jobs:
       if: github.event_name == 'pull_request'
       run: |
         # Perform what-if deployment and output to variable and console
-        az deployment group what-if `
-        --resource-group ${{ env.ResourceGroupName }} `
+        az deployment sub what-if `
+        --location ${{ env.Location }} `
         --template-file src/webapp/main.bicep `
         --parameters 'name=demoApp' 'prefix=tia' | Tee-Object -Variable deployment
         
@@ -67,7 +67,7 @@ jobs:
       shell: pwsh
       run: |
         # Perform deployment of resource
-        az deployment group create `
-        --resource-group ${{ env.ResourceGroupName }} `
+        az deployment sub create `
+        --location ${{ env.Location }} `
         --template-file src/webapp/main.bicep `
         --parameters 'name=demoApp' 'prefix=tia'
