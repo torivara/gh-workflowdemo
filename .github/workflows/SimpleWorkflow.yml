@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'src/resourcegroup/'
+      - 'src/resourcegroup/**'
 
 env:
   Subscription: ${{ secrets.SUBSCRIPTION_ID }}
