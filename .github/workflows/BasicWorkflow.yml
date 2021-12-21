@@ -6,11 +6,11 @@ env:
   output: 'Hello world!'
 
 jobs:
-  build-and-deploy:
+  basic-workflow:
     runs-on: ubuntu-latest
     steps:
 
     - name: Write-output
       shell: pwsh
       run: |
-          Write-Output ${{ env.output }}
+          Write-Output "${{ env.output }}"
