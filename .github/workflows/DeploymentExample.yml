@@ -65,4 +65,4 @@ jobs:
         az deployment sub create `
         --location ${{ env.Location }} `
         --template-file src/webapp/main.bicep `
-        --parameters 'name=demoApp' 'prefix=tia'
+        --parameters 'appName=demoApp' 'prefix=tia'
