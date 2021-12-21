@@ -1,7 +1,5 @@
 targetScope = 'subscription'
 
-//trigger
-
 param appName string = 'demoApp'
 param resourceGroupName string = 'tia-${uniqueString(appName)}-rg'
 
