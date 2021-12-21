@@ -15,7 +15,7 @@ env:
   ResourceGroupName: 'tia-bicepdemo-community-rg'
 
 jobs:
-  build-and-deploy:
+  simple-workflow:
     runs-on: ubuntu-latest
     steps:
 
