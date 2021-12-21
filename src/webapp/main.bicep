@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 param appName string = 'demoApp'
-param resourceGroupName string = ''
+param resourceGroupName string = 'tia-${uniqueString(appName)}-rg'
 
 module rg '../../modules/arm/Microsoft.Resources/resourceGroups/deploy.bicep' = {
   name: 'rg-deploy'
