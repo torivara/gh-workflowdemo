@@ -32,6 +32,6 @@ jobs:
       run: |
         # Perform deployment of resource
         az deployment sub create `
-        --location ${{ env.Location }}
+        --location ${{ env.Location }} `
         --template-file src/resourcegroup/main.bicep `
         --parameters resourceGroupName=${{ env.ResourceGroupName }}
